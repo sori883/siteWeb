@@ -1,0 +1,8 @@
+runner:
+  eslint:
+    cmd: yarn --silent tslint
+    format: eslint
+  stylelint:
+    cmd: yarn --silent scsslint
+    errorformat:
+      - "%f:%l:%c:%m"
