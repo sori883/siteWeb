@@ -8,9 +8,7 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <h1>home</h1>
-      <Link href='/login'>
-        <a>Login画面に遷移</a>
-      </Link>
+
     </Layout>
   );
 };
