@@ -1,17 +1,16 @@
 import type { NextPage } from 'next'
-import Link from 'next/link';
-import { Layout } from 'components/layouts/LayoutManage'
+import { LayoutManage } from 'components/layouts/LayoutManage'
+import { SidebarManage } from 'components/layouts/SidebarManage'
 import { useRequireLogin } from 'hooks/auth/useRequireLogin'
 
 const Home: NextPage = () => {
   useRequireLogin();
   return (
-    <Layout>
+    <LayoutManage>
       <h1>home</h1>
-      <Link href='/login'>
-        <a>Login画面に遷移</a>
-      </Link>
-    </Layout>
+      <SidebarManage />
+
+    </LayoutManage>
   );
 };
 

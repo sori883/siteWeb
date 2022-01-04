@@ -9,7 +9,7 @@ export const useReset= ():ResetHook  => {
     try {
       await apiClient.get('/sanctum/csrf-cookie')
       await apiClient.post('/api/reset', req);
-      router.push('/home')
+      router.push('/user/home')
     } catch(e) {
       console.log(e)
     }

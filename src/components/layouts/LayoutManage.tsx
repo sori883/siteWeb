@@ -5,7 +5,7 @@ type Props = {
   children: ReactNode;
 }
 
-export function Layout({ children, ...props }: Props) :ReactNode {
+export function LayoutManage({ children, ...props }: Props): JSX.Element {
   const { logout } = useLogout();
 
   const handleLogout = ():void => {

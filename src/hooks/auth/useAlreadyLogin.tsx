@@ -8,6 +8,6 @@ export function useAlreadyLogin():void {
   
   useEffect(() => {
     if(isAuthChecking) return; // まだ確認中
-    if(currentUser) router.push("/home"); // ログイン済みのためホームに遷移
+    if(currentUser) router.push("/user/home"); // ログイン済みのためホームに遷移
   },[isAuthChecking, currentUser])
 }
