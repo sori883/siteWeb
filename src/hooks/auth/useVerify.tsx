@@ -12,13 +12,13 @@ export const useVerify= ():VerifyHook  => {
 
   const verify = async (req: VerifyParam):Promise<void> => {
     // ログイン済みの場合はhomeに遷移
-    if(currentUser) router.push('/home')
+    if(currentUser) router.push('/user/home')
 
     try {
       await apiClient.get('/sanctum/csrf-cookie')
       const verify = await apiClient.post('/verify', { token: req});
       setCurrentUser(verify.data)
-      router.push('/home')
+      router.push('/user/home')
     } catch(e) {
       console.log(e)
     }

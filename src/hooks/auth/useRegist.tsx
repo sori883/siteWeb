@@ -9,7 +9,7 @@ export const useRegist= ():RegisterHook  => {
 
   const regist = async (req: RegisterParam):Promise<void> => {
     // ログイン済みの場合はhomeに遷移
-    if(currentUser) router.push('/home')
+    if(currentUser) router.push('/user/home')
 
     try {
       await apiClient.get('/sanctum/csrf-cookie')
