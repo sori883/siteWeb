@@ -3,10 +3,10 @@ import Link from 'next/link';
 export function SidebarManage(): JSX.Element {
   return (
     <div>
-      <Link href=''>
+      <Link href='/article/post'>
         投稿
       </Link><br />
-      <Link href=''>
+      {/* <Link href=''>
         記事管理
       </Link><br />
       <Link href=''>
@@ -14,7 +14,7 @@ export function SidebarManage(): JSX.Element {
       </Link><br />
       <Link href=''>
         コメント管理
-      </Link><br />
+      </Link><br /> */}
     </div>
   )
 }
