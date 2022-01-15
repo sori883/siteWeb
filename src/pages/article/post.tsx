@@ -1,8 +1,8 @@
-import type { NextPage } from 'next'
-import { LayoutManage } from 'components/layouts/LayoutManage'
-import { SidebarManage } from 'components/layouts/SidebarManage'
-import { PostForm } from 'components/forms/PostForm'
-import { useRequireLogin } from 'hooks/auth/useRequireLogin'
+import type { NextPage } from 'next';
+import { LayoutManage } from 'components/layouts/LayoutManage';
+import { SidebarManage } from 'components/layouts/SidebarManage';
+import { PostForm } from 'components/forms/PostForm';
+import { useRequireLogin } from 'hooks/auth/useRequireLogin';
 
 const ArticlePost: NextPage = () => {
   useRequireLogin();
