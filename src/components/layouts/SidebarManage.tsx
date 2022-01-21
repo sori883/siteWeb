@@ -6,6 +6,9 @@ export function SidebarManage(): JSX.Element {
       <Link href='/article/post'>
         投稿
       </Link><br />
+      <Link href='/article/'>
+        一覧
+      </Link><br />
       {/* <Link href=''>
         記事管理
       </Link><br />
