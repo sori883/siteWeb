@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArticlesList, ArticlesItem } from 'types/article';
 import { fetchAllArticles } from 'requests/article/allArticles';
-import { ArticleListItem } from 'components/articles/ListItem'
+import { ArticleListItem } from 'components/articles/ArticleListItem'
 
 export function ArticleList(): JSX.Element {
   const [articles, SetArticles] = useState<ArticlesList>([{ 
