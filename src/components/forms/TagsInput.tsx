@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { fetchAllTags } from 'requests/tag/allTags';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { delimiters } from 'lib/tagInput';
-import { Tag, InputTagsForm, InputTag, ReactTagsInputProps } from 'types/tag';
+import { RHFTag, RHFTagsForm, Tag, RHFTagsInputProps } from 'types/tag';
 
-export default function ReactTagsInput(props: ReactTagsInputProps): JSX.Element {
-  const [suggest, SetSuggest] = useState<InputTagsForm>([
+export default function ReactTagsInput(props: RHFTagsInputProps): JSX.Element {
+  const [suggest, SetSuggest] = useState<RHFTagsForm>([
     { id: '', text: '' },
   ]);
 
@@ -18,7 +18,7 @@ export default function ReactTagsInput(props: ReactTagsInputProps): JSX.Element 
           fetchTags.map((item: Tag) => {
             return {
               id: `${item.id}`,
-              text: item.name,
+              text: item.text,
             }
           })
         );
@@ -35,7 +35,7 @@ export default function ReactTagsInput(props: ReactTagsInputProps): JSX.Element 
     }));
   };
 
-  const handleAddition = (tag: InputTag) :void => {
+  const handleAddition = (tag: RHFTag) :void => {
     props.setTagsInput([...props.tagsInput, tag]);
   };
 
