@@ -7,7 +7,7 @@ export function ArticleListItem(props: {article: ArticlesItem}): JSX.Element {
 
   const router = useRouter();
 
-  const handleArticlleEdit = ():void => {
+  const handleArticleEdit = ():void => {
     router.push(
       {
         pathname: '/article/edit',
@@ -15,14 +15,16 @@ export function ArticleListItem(props: {article: ArticlesItem}): JSX.Element {
       });
   };
 
-  const handleArticlleDelete = ():void => {
+  const handleArticleDelete = ():void => {
+    if (!props.article.id) return
     articleDelete(props.article.id);
   };
 
   return (
     <>
-      <button onClick={handleArticlleEdit}>編集</button>
-      <button onClick={handleArticlleDelete}>削除</button>
+      <button onClick={handleArticleEdit}>編集</button>
+      <button onClick={handleArticleDelete}>削除</button>
+      <button onClick={handleArticleDelete}>非公開</button>
       <p>{props.article.id}</p>
       <p>{props.article.title}</p>
       <p>{props.article.permalink}</p>
