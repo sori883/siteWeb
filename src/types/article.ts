@@ -48,6 +48,10 @@ export type ArticleDeleteHook = {
   articleDelete: (req: ArticlesItemId) => Promise<void>;
 };
 
+export type ArticleVisibleHook = {
+  articleVisible: (req: ArticlesItemId) => Promise<void>;
+};
+
 export type ArticleSingle = {
   id: number,
   permalink: string;
