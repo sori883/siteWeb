@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import { CategoryList, CategoryItem, CategoryInputProps } from 'types/category';
+import { CategoryList, CategoryItem } from 'types/category';
 import { fetchAllCategories } from 'requests/category/allCategories';
+import { CategoryListItem } from 'components/categories/CategoryListItem'
 
-export function CategorySelect(props: CategoryInputProps): JSX.Element {
+export function CategoryList(): JSX.Element {
   const [categories, SetCategories] = useState<CategoryList>([{ 
     id: null,
     name: '',
-    slug: '',
+    slug: ''
   }]);
-  
-  // カテゴリ取得
+
+  // 記事を取得
   useEffect(() => {
     (async function (): Promise<void> {
       try {
@@ -21,28 +22,18 @@ export function CategorySelect(props: CategoryInputProps): JSX.Element {
     })();
   },[]);
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    e.preventDefault();
-    console.log(e.target.value)
-    props.setCategoryInput(Number(e.target.value));
-  }
-
   return (
-    <select
-      onChange={handleOnChange}
-    >
+    <>
       {
         categories.map((item: CategoryItem) => {
           return (
-            <option 
-              value={`${item.id}`}
+            <CategoryListItem
+              category={item}
               key={item.id}
-            >
-              {item.name}
-            </option>
+            />
           )
         })
       }
-    </select>
+    </>
   )
 }
