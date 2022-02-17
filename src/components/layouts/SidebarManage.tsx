@@ -12,6 +12,9 @@ export function SidebarManage(): JSX.Element {
       <Link href='/category/'>
         カテゴリ一覧
       </Link><br />
+      <Link href='/tag/'>
+        タグ一覧
+      </Link><br />
     </div>
   )
 }

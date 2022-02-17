@@ -5,11 +5,14 @@ export type Tag = {
   text: string, 
 };
 
-export type Tags = 
-  {
-    id: number,
-    text: string, 
-  }[];
+export type Tags = {
+  id: number,
+  text: string, 
+}[];
+
+export type TagUpdate = {
+  text: string, 
+};
 
 // react-tag-inputのhandleAdditionに合わせて設定
 export type RHFTag = {
@@ -34,3 +37,11 @@ export type RHFTagsInputProps = {
   tagsInput: RHFTags;
   setTagsInput: Dispatch<SetStateAction<RHFTags>>;
 }
+
+export type TagDeleteHook = {
+  tagDelete: (req: number) => Promise<void>;
+};
+
+export type TagUpdateHook = {
+  tagUpdate: (id: number, req: TagUpdate) => Promise<void>;
+};

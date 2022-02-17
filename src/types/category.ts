@@ -10,6 +10,11 @@ export type CategoryItem = {
   slug: string,
 };
 
+export type CategoryUpdate = {
+  name: string,
+  slug: string,
+};
+
 export type CategoryInput = number | null;
 
 // tags-inputを除く投稿フォーム
@@ -27,6 +32,9 @@ export type CategoryStoreHook = {
   categoryStore: (req: CategoryCreateForm) => Promise<void>;
 };
 
+export type CategoryUpdateHook = {
+  categoryUpdate: (id: number, req: CategoryUpdate) => Promise<void>;
+};
 
 export type CategoryDeleteHook = {
   categoryDelete: (req: CategoryItemId) => Promise<void>;
