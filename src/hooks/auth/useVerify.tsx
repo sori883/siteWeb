@@ -16,7 +16,7 @@ export const useVerify= ():VerifyHook  => {
 
     try {
       await apiClient.get('/sanctum/csrf-cookie')
-      const verify = await apiClient.post('/verify', { token: req});
+      const verify = await apiClient.post('/api/verify', { token: req});
       setCurrentUser(verify.data)
       router.push('/user/home')
     } catch(e) {

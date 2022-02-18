@@ -15,7 +15,7 @@ export const useLogout= ():LogoutHook  => {
     if(!currentUser) router.push('/')
 
     try {
-      await apiClient.post('/logout')
+      await apiClient.post('/api/logout')
       setCurrentUser(null)
       router.push("/");
     } catch(e) {

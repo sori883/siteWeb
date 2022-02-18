@@ -13,7 +13,7 @@ export const useRegist= ():RegisterHook  => {
 
     try {
       await apiClient.get('/sanctum/csrf-cookie')
-      await apiClient.post('/register', req)
+      await apiClient.post('/api/register', req)
     } catch(e) {
       console.log(e)
     }
