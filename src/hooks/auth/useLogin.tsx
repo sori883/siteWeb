@@ -13,7 +13,7 @@ export const useLogin = ():LoginHook  => {
 
     try {
       await apiClient.get('/sanctum/csrf-cookie');
-      await apiClient.post('/login', req);
+      await apiClient.post('/api/login', req);
       router.push('/user/home');
     } catch(e) {
       console.log(e);
