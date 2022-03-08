@@ -1,22 +1,33 @@
 import Link from 'next/link';
-import type { NextPage } from 'next'
-import { useForgot } from 'hooks/auth/useForgot';
-import { ForgotParam } from 'types/user'
-import { useForm } from 'react-hook-form';
+import type { NextPage } from 'next';
+import { useForm, SubmitHandler  } from "react-hook-form";
+import { ForgotParam } from 'types/auth';
+import { useAuth } from 'hooks/auth';
+
 
 const Forgot: NextPage = () => {
-  const { register, getValues, handleSubmit } = useForm<ForgotParam>();
-  const { forgot } = useForgot();
+  const { register, handleSubmit, formState: { errors } } = useForm<ForgotParam>();
+  const { forgot } = useAuth();
 
-  const forgotHandle = (): void => {
-    forgot(getValues());
+  const onSubmit: SubmitHandler<ForgotParam> = (data) => {
+    forgot(data);
   };
 
   return (
     <>
       <h1>パスワードリセットメール送信</h1>
-      <form onSubmit={handleSubmit(forgotHandle)}>
-        <input {...register('email')} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          {...register('email', {
+            required: '必ず入力してください',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'メールアドレスの形式ではありません'
+            }
+          })}
+          aria-invalid={errors.email !== undefined}
+        />
+        { errors.email?.message }
         <input type="submit" />
       </form>
 

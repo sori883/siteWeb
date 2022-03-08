@@ -1,20 +1,19 @@
 import { useEffect } from 'react';
-import type { NextPage } from 'next'
+import type { NextPage } from 'next';
 import { useAlreadyLogin } from 'hooks/auth/useAlreadyLogin';
 import { useRouter } from 'next/router';
-import { useVerify } from 'hooks/auth/useVerify';
+import { useAuth } from 'hooks/auth';
 
 
 const Verrify: NextPage = () => {
   useAlreadyLogin();
   const router = useRouter();
   const { token } = router.query;
-  const { verify } = useVerify();
+  const { verify } = useAuth();
 
   useEffect(() => {
-    if(router.isReady) verify(token)
+    if(router.isReady) verify(token);
   },[token, router]);
-
 
   return (
     <>
