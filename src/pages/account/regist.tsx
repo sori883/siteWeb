@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { NextPage } from 'next';
-import { RegisterParam } from 'types/user';
+import { RegisterParam } from 'types/auth';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAuth } from 'hooks/auth';
 import { useAlreadyLogin } from 'hooks/auth/useAlreadyLogin';
