@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
-import { currentUserState } from 'states/atoms/user'
-import { CurrentUserHook } from 'types/user'
+import { currentUserState } from 'states/atoms/user';
+import { CurrentUserHook } from 'types/user';
 
 export function useCurrentUser():CurrentUserHook {
   const currentUser = useRecoilValue(currentUserState);

@@ -1,38 +1,46 @@
-import { useState, useEffect } from 'react';
-import { Tag, Tags } from 'types/tag';
-import { fetchAllTags } from 'requests/tag/allTags';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { TagsListItem  } from 'components/tags/TagsListItem';
+import { useTags } from 'hooks/tag';
+import { Tag } from 'types/tag/tag';
+import { getUrlParam } from 'lib/libs';
+import { Pagination } from '@mantine/core';
 
 export function TagList(): JSX.Element {
-  const [tags, SetTags] = useState<Tags>([{ 
-    id: 0,
-    text: ''
-  }]);
+  const router = useRouter();
+  // ページを取得
+  const defaultPage: number = Number(getUrlParam('page')) || 1;
+  // ページネーション用
+  const [pageIndex, setPageIndex] = useState<number>(defaultPage);
+  const {tags, error, deleteAction, updateAction} =  useTags(defaultPage);
 
-  // 記事を取得
-  useEffect(() => {
-    (async function (): Promise<void> {
-      try {
-        const fetchTags = await fetchAllTags();
-        SetTags(fetchTags);
-      }catch(e){
-        console.log(e)
-      }
-    })();
-  },[]);
+  const handlePagerClick = (page: number): void => {
+    setPageIndex(page);
+    // アドレスURLの書き換え
+    router.push({
+      query: { page :page }
+    });
+  };
 
+  if (error) return <div>エラーが発生しました</div>;
+  if (!tags) return <div>データ取得中</div>;
   return (
     <>
       {
-        tags.map((item: Tag) => {
-          return (
-            <TagsListItem
-              tag={item}
-              key={item.id}
-            />
-          )
-        })
+        tags.data.map((item: Tag) => (
+          <TagsListItem
+            tag={item}
+            deleteAction={deleteAction}
+            updateAction={updateAction}
+            key={item.id}
+          />
+        ))
       }
+      <Pagination
+        page={pageIndex}
+        onChange={handlePagerClick}
+        total={tags.lastPage}
+      />
     </>
-  )
+  );
 }

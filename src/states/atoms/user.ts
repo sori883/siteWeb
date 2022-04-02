@@ -5,6 +5,6 @@ import { AtomKeys } from 'states/recoilKeys';
 // undefined : まだログイン確認が完了していない状態とする
 // null : ログイン確認をした結果、ログインしていなかった状態とする
 export const currentUserState  = atom<undefined | null | CurrentUser>({
-  key: AtomKeys.USER_STATE,
+  key: AtomKeys.CURRENT_USER_STATE,
   default: undefined,
 });
