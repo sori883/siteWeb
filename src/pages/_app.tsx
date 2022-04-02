@@ -1,5 +1,6 @@
 import '../styles/globals.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import { NormalizeCSS, MantineProvider } from '@mantine/core';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
 import { SWRConfig } from 'swr';
@@ -31,6 +32,7 @@ function AppInit():null {
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <RecoilRoot>
+      <NormalizeCSS />
       <NextHeadSeo
         og={{
           image: "https://example.com/default-og.png",
@@ -41,17 +43,19 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
           card: "summary"
         }}
       />
-      <AppInit />
-      <SWRConfig
-        value={{
-          // エラー時リトライ回数
-          errorRetryCount: 0,
-          // windowフォーカス時再取得しない
-          revalidateOnFocus: false
-        }}
-      >
-        <Component {...pageProps} />
-      </SWRConfig>
+      <MantineProvider>
+        <SWRConfig
+          value={{
+            // エラー時リトライ回数
+            errorRetryCount: 0,
+            // windowフォーカス時再取得しない
+            revalidateOnFocus: false
+          }}
+        >
+          <Component {...pageProps} />
+          <AppInit />
+        </SWRConfig>
+      </MantineProvider>
       <ToastContainer
         position="bottom-right"
         autoClose={2000}
