@@ -1,29 +1,39 @@
 import { useState } from 'react';
-import { Tag, TagUpdate } from 'types/tag';
-import { useTagDelete } from 'hooks/tag/useTagDelete';
-import { useTagUpdate } from 'hooks/tag/useTagUpdate';
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler  } from "react-hook-form";
+import {
+  Tag,
+  TagActionParam,
+  UpdateAction,
+  DeleteAction
+} from 'types/tag/tag';
 
-export function TagsListItem(props: {tag: Tag}): JSX.Element {
 
-  const { tagDelete } = useTagDelete();
-  const { tagUpdate } = useTagUpdate();
-  const { register, getValues, handleSubmit, setValue } = useForm<TagUpdate>();
+export function TagsListItem(props: {
+  tag: Tag,
+  updateAction: UpdateAction,
+  deleteAction: DeleteAction
+}): JSX.Element {
+
+  const { register, handleSubmit, formState: { errors } } = useForm<TagActionParam>();
+  // 編集フォーム切り替え用ステート
   const [toggle, setToggle] = useState<boolean>(true);
 
   const handleTagDelete = ():void => {
-    if (!props.tag.id) return
-    tagDelete(props.tag.id);
+    props.deleteAction(props.tag);
   };
 
   const handleToggleElement = ():void => {
-    setValue('text', props.tag.text);
     setToggle(!toggle);
   };
 
-  const handleTagUpdate = ():void => {
-    if (!props.tag.id) return
-    tagUpdate(props.tag.id, getValues());
+  const onSubmit: SubmitHandler<TagActionParam> = (data) => {
+    const updateData = {
+      ...props.tag,
+      ...data
+    };
+    
+    setToggle(!toggle);
+    return props.updateAction(updateData);
   };
 
 
@@ -39,9 +49,19 @@ export function TagsListItem(props: {tag: Tag}): JSX.Element {
         :
         <>
           <button onClick={handleToggleElement}>中止</button>
-          <form onSubmit={handleSubmit(handleTagUpdate)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <p>{props.tag.id}</p>
-            <input {...register('text')} />
+            <input
+              defaultValue={props.tag.text}
+              {...register('text', {
+                required: '必ず入力してください',
+                maxLength: {
+                  value: 20,
+                  message: '20文字以内で入力してください'
+                },
+              })}
+            />
+            { errors.text?.message }
             <input type="submit" />
           </form>
         </>

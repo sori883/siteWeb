@@ -1,35 +1,40 @@
 import { useState } from 'react';
-import { CategoryItem, CategoryUpdate } from 'types/category';
-import { useCategoryDelete } from 'hooks/category/useCategoryDelete';
-import { useCategoryUpdate } from 'hooks/category/useCategoryUpdate';
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler  } from "react-hook-form";
+import {
+  CategoryItem,
+  CategoryActionParam,
+  UpdateAction,
+  DeleteAction
+} from 'types/category/category';
 
-export function CategoryListItem(props: {category: CategoryItem}): JSX.Element {
+export function CategoryListItem(props: {
+  category: CategoryItem,
+  updateAction: UpdateAction,
+  deleteAction: DeleteAction
+}): JSX.Element {
 
-  const { categoryDelete } = useCategoryDelete();
-  const { categoryUpdate } = useCategoryUpdate();
-  const { register, getValues, handleSubmit, setValue } = useForm<CategoryUpdate>();
+  const { register, handleSubmit, formState: { errors } } = useForm<CategoryActionParam>();
+  // 編集フォーム切り替え用ステート
   const [toggle, setToggle] = useState<boolean>(true);
 
 
   const handleCategoryDelete = ():void => {
-    if (!props.category.id) return
-    categoryDelete(props.category.id);
+    props.deleteAction(props.category);
   };
 
   const handleToggleElement = ():void => {
-    setValue('name', props.category.name);
-    setValue('slug', props.category.slug);
     setToggle(!toggle);
   };
-
-  const handleCategoryUpdate = ():void => {
-    if (!props.category.id) return
-    categoryUpdate(props.category.id, getValues());
+  
+  const onSubmit: SubmitHandler<CategoryActionParam> = (data) => {
+    const updateData = {
+      ...props.category,
+      ...data
+    };
+    
+    setToggle(!toggle);
+    return props.updateAction(updateData);
   };
-
-
-
 
   return (
     <>
@@ -44,9 +49,35 @@ export function CategoryListItem(props: {category: CategoryItem}): JSX.Element {
         :
         <>
           <button onClick={handleToggleElement}>中止</button>
-          <form onSubmit={handleSubmit(handleCategoryUpdate)}>
-            <input {...register('name')} />
-            <input {...register('slug')} />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <label>name</label>
+            <input
+              defaultValue={props.category.name}
+              {...register('name', {
+                required: '必ず入力してください',
+                maxLength: {
+                  value: 20,
+                  message: '20文字以内で入力してください'
+                },
+              })}
+            />
+            { errors.name?.message }
+            <label>slug</label>
+            <input
+              defaultValue={props.category.slug}
+              {...register('slug', {
+                required: '必ず入力してください',
+                maxLength: {
+                  value: 20,
+                  message: '20文字以内で入力してください'
+                },
+                pattern: {
+                  value: /^[0-9a-zA-Z_-]+$/,
+                  message: '使用出来ない文字が含まれています'
+                }
+              })}
+            />
+            { errors.slug?.message }
             <input type="submit" />
           </form>
         </>

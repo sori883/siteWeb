@@ -1,24 +1,47 @@
-import { useForm } from "react-hook-form";
-import { CategoryCreateForm } from 'types/category';
-import { useCategoryStore } from 'hooks/category/useCategoryStore';
+import { useForm, SubmitHandler  } from "react-hook-form";
+import { useCategories } from 'hooks/category';
+import { CategoryActionParam } from 'types/category/category';
+import { getUrlParam } from 'lib/libs';
 
 export function CategoryCreateForm(): JSX.Element {
-  const { categoryStore } = useCategoryStore();
+  // ページを取得
+  const defaultPage: number = Number(getUrlParam('page')) || 1;
+  const { createAction } = useCategories(defaultPage);
 
-  const { register, getValues, handleSubmit } = useForm<CategoryCreateForm>();
+  const {  register, handleSubmit, formState: { errors } } = useForm<CategoryActionParam>();
 
-  const submitHandle = (): void => {
-    categoryStore(getValues());
-  };
+  const onSubmit: SubmitHandler<CategoryActionParam> = (data) => createAction(data);
 
   return (
     <>
       <h1>カテゴリ作成</h1>
-      <form onSubmit={handleSubmit(submitHandle)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label>name</label>
-        <input {...register('name')} />
+        <input
+          {...register('name', {
+            required: '必ず入力してください',
+            maxLength: {
+              value: 20,
+              message: '20文字以内で入力してください'
+            },
+          })}
+        />
+        { errors.name?.message }
         <label>slug</label>
-        <input {...register('slug')} />
+        <input
+          {...register('slug', {
+            required: '必ず入力してください',
+            maxLength: {
+              value: 20,
+              message: '20文字以内で入力してください'
+            },
+            pattern: {
+              value: /^[0-9a-zA-Z_-]+$/,
+              message: '使用出来ない文字が含まれています'
+            }
+          })}
+        />
+        { errors.slug?.message }
         <input type="submit" />
       </form>
     </>

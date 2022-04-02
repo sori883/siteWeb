@@ -1,40 +1,50 @@
-import { useState, useEffect } from 'react';
-import { ArticlesList, ArticlesItem } from 'types/article';
-import { fetchAllArticles } from 'requests/article/allArticles';
-import { ArticleListItem } from 'components/articles/ArticleListItem'
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { getUrlParam } from 'lib/libs';
+import { ArticleListItem } from 'components/articles/ArticleListItem';
+import { useArticles } from 'hooks/article';
+import { ArticleItem } from 'types/article/article';
+import { Loader, Pagination } from '@mantine/core';
 
 export function ArticleList(): JSX.Element {
-  const [articles, SetArticles] = useState<ArticlesList>([{ 
-    id: null,
-    title: '',
-    permalink: '',
-    publish_at: '',
-  }]);
+  const router = useRouter();
+  // ページを取得
+  const defaultPage: number = Number(getUrlParam('page')) || 1;
+  // ページネーション用
+  const [pageIndex, setPageIndex] = useState<number>(defaultPage);
+  const {articles, error, deleteAction, visibleAction } =  useArticles(defaultPage);
 
-  // 記事を取得
-  useEffect(() => {
-    (async function (): Promise<void> {
-      try {
-        const fetchArticles = await fetchAllArticles();
-        SetArticles(fetchArticles);
-      }catch(e){
-        console.log(e)
-      }
-    })();
-  },[]);
+  const handlePagerClick = (page: number): void => {
+    setPageIndex(page);
+    // アドレスURLの書き換え
+    router.push({
+      query: { page :page }
+    });
+  };
+
+
+  if (error) return <div>エラーが発生しました</div>;
+  if (!articles) return <Loader />;
 
   return (
     <>
       {
-        articles.map((item: ArticlesItem) => {
-          return (
-            <ArticleListItem
-              article={item}
-              key={item.id}
-            />
-          )
-        })
+        articles.data.map((item: ArticleItem) => (
+          <ArticleListItem
+            article={item}
+            deleteAction={deleteAction}
+            visibleAction={visibleAction}
+            key={item.id}
+          />
+        ))
       }
+      <div>
+        <Pagination
+          page={pageIndex}
+          onChange={handlePagerClick}
+          total={articles.lastPage}
+        />
+      </div>
     </>
-  )
+  );
 }
