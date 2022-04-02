@@ -1,21 +1,31 @@
 import type { NextPage } from 'next';
 import { LayoutManage } from 'components/layouts/LayoutManage';
 import { SidebarManage } from 'components/layouts/SidebarManage';
-import { PostForm } from 'components/forms/PostForm';
+import { ArticleForm } from 'components/articles/ArticleForm';
 import { useRequireLogin } from 'hooks/auth/useRequireLogin';
-import { useArticleStore } from 'hooks/article/useArticleStore';
+import { useArticle } from 'hooks/article';
 
 const ArticlePost: NextPage = () => {
   useRequireLogin();
-  // 記事登録用フック
-  const { articleStore } = useArticleStore();
+  const { createAction } = useArticle();
+
+  const createArticle = {
+    permalink: '',
+    title: '',
+    entry: '',
+    publish_at: true,
+    image_id: null,
+    category: null,
+    tags: undefined
+  };
+
   return (
     <LayoutManage>
       <h1>NEW</h1>
       <SidebarManage />
-      <PostForm
-        article={null}
-        submitHandle={articleStore}
+      <ArticleForm
+        article={createArticle}
+        submitAction={createAction}
       />
 
     </LayoutManage>
