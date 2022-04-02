@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { LayoutManage } from 'components/layouts/LayoutManage';
 import { SidebarManage } from 'components/layouts/SidebarManage';
 import { useRequireLogin } from 'hooks/auth/useRequireLogin';
-import { TagList } from 'components/tags/TagsList'
+import { TagList } from 'components/tags/TagsList';
 
 
 const TagIndex: NextPage = () => {
