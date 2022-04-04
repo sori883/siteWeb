@@ -30,7 +30,6 @@ export const useAuth = (): AuthHook => {
       })
   );
 
-
   const regist = async (req: RegisterParam): Promise<void> => {
     if(currentUser) router.push(pagesPath.user.home.$url());
     await axios.get('/sanctum/csrf-cookie');
@@ -99,7 +98,7 @@ export const useAuth = (): AuthHook => {
 
     await axios.post('/api/logout')
       .then(() => {
-        setCurrentUser(null);
+        setCurrentUser(undefined);
         router.push(pagesPath.$url());
       })
       .catch(() => {
