@@ -15,6 +15,9 @@ export function SidebarManage(): JSX.Element {
       <Link href='/tag/'>
         タグ一覧
       </Link><br />
+      <Link href='/library'>
+        画像
+      </Link><br />
     </div>
   );
 }
