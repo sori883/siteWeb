@@ -31,8 +31,8 @@ export type TagActionParam = {
 };
 
 // actions
-export type UpdateAction = (article: Tag) => Promise<void>;
-export type DeleteAction = (article: Tag) => Promise<void>;
+export type UpdateAction = (tag: Tag) => Promise<void>;
+export type DeleteAction = (tag: Tag) => Promise<void>;
 
 export type TagsHook = {
   tags: fetchAllTagList | undefined;

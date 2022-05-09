@@ -34,8 +34,8 @@ export type CategoryActionParam = {
 }
 
 // actions
-export type CreateAction = (article: CategoryActionParam) => Promise<void>;
-export type UpdateAction = (article: Category) => Promise<void>;
+export type CreateAction = (category: CategoryActionParam) => Promise<void>;
+export type UpdateAction = (category: Category) => Promise<void>;
 export type DeleteAction = (req: CategoryItem) => Promise<void>;
 
 // return
