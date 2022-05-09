@@ -32,6 +32,9 @@ export const pagesPath = {
   category: {
     $url: (url?: { hash?: string }) => ({ pathname: '/category' as const, hash: url?.hash })
   },
+  library: {
+    $url: (url?: { hash?: string }) => ({ pathname: '/library' as const, hash: url?.hash })
+  },
   tag: {
     $url: (url?: { hash?: string }) => ({ pathname: '/tag' as const, hash: url?.hash })
   },
