@@ -3,7 +3,7 @@ import { useForm, SubmitHandler  } from "react-hook-form";
 import { ArticlePreview } from 'components/articles/ArticlePreview';
 import { CategorySelect } from 'components/articles/CategorySelect';
 import { TagsSelect } from 'components/articles/TagsSelect';
-import { useSelectCategories, useSelectTags } from 'hooks/selectValue';
+import { useSelectCategories, useSelectTags } from 'hooks/selector/selectValue';
 import {
   Article,
   ArticleCreateParam,
@@ -11,6 +11,8 @@ import {
   ArticleForm,
 } from 'types/article/article';
 import { Markdown } from 'types/article/markdown';
+import { ImgSelect } from 'components/imageLibrary/ImgSelect';
+import { useSelectImages } from 'hooks/selector/imageSelector';
 
 export function ArticleForm(props: {article: Article | ArticleCreateParam, submitAction: SubmitAction} ): JSX.Element {
 
@@ -29,19 +31,33 @@ export function ArticleForm(props: {article: Article | ArticleCreateParam, submi
     createInputTag,
     setTagsInput
   } = useSelectTags(props.article.tags);
-
+ 
+  // カテゴリー選択用
   const {
     selectCategories,
     categoryInput,
     setCategoryInput,
   } = useSelectCategories(props.article.category?.id ?? null);
 
+  // 画像セレクト
+  const {
+    imageInput,
+    setImageInput,
+    images,
+    isLast,
+    loadMoreImages,
+    interval
+  } = useSelectImages({}, props.article.image_id);
+
+  // 記事本体のフォーム
   const { register, handleSubmit, formState: { errors } } = useForm<ArticleForm>();
 
+  // 登録処理
   const onSubmit: SubmitHandler<Article> = (data) => {
     const InputData = {
       ...data,
       category_id: categoryInput,
+      image_id: imageInput,
       tags: createInputTag(tagsInput)
     };
   
@@ -119,13 +135,21 @@ export function ArticleForm(props: {article: Article | ArticleCreateParam, submi
             :
             <div>読込中</div>
         }
-        {/* <TagsInput
-          tagsInput = {tagsInput}
-          setTagsInput = {setTagsInput}
-        /> */}
         <input type="submit" />
       </form>
       <ArticlePreview markdown={md} />
+      {
+        images ?
+          <ImgSelect
+            images={images}
+            setImageInput={setImageInput}
+            interval={interval}
+            isLast={isLast}
+            loadMoreImages={loadMoreImages}
+          />
+          :
+          <div>読込中</div>
+      }
     </>
   );
 }

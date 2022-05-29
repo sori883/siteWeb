@@ -5,7 +5,7 @@ import {
   TagsInput,
   TagInputSetter
 } from 'types/tag/tag';
-import { Option, FetchSelectorTags } from 'types/lib/reactSelect';
+import { Option, FetchSelectorTags } from 'types/selector/reactSelect';
 
 export function TagsSelect(props: {
   initVal: TagsInput | undefined,

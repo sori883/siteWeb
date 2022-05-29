@@ -9,10 +9,10 @@ import {
   FetchSelectorTags,
   SelectValueTags,
   Option
-} from 'types/lib/reactSelect';
+} from 'types/selector/reactSelect';
 
+// カテゴリーセレクター
 export const useSelectCategories = (id: number | null): SelectValueCategories => {
-
   // カテゴリー選択値を格納
   const [categoryInput, setCategoryInput] = useState<CategoryInput>(id);
 
@@ -29,8 +29,8 @@ export const useSelectCategories = (id: number | null): SelectValueCategories =>
   };
 };
 
+// タグセレクター
 export const useSelectTags = (tag: TagsInput | undefined): SelectValueTags => {
-
   // 初期値設定用
   const createSelectTag = (tag:TagsInput | undefined):Option[] | undefined => tag ?
     tag.map((item) => (
