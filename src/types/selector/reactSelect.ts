@@ -7,7 +7,7 @@ export type Option = {
   value: number;
 };
 
-/* select value hook */
+// カテゴリーセレクター
 export type FetchSelectorCategories = {
   data: Option[]
 };
@@ -19,6 +19,7 @@ export type SelectValueCategories = {
   error: Error | undefined;
 }
 
+// タグセレクター
 export type FetchSelectorTags = {
   data: Option[]
 };

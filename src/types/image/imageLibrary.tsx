@@ -4,7 +4,7 @@ export type ImageItem = {
   path: string,
 };
 
-export type ImagesList = [ImageItem];
+export type ImagesList = ImageItem[];
 
 /* fetchAllImage Response */
 export type FetchImagesList = {

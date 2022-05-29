@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Option } from 'types/lib/reactSelect';
+import { Option } from 'types/selector/reactSelect';
 
 /* list */
 export type fetchAllTagList = {

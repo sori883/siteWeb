@@ -4,7 +4,7 @@ import {
   Category,
   CategoryInputSetter
 } from 'types/category/category';
-import { FetchSelectorCategories, Option } from 'types/lib/reactSelect';
+import { FetchSelectorCategories, Option } from 'types/selector/reactSelect';
 
 export function CategorySelect(props: {
   initVal: Category | null,
