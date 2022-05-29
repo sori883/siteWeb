@@ -54,7 +54,6 @@ export function ArticleForm(props: {article: Article | ArticleCreateParam, submi
 
   // 登録処理
   const onSubmit: SubmitHandler<Article> = (data) => {
-    console.log(imageInput);
     const InputData = {
       ...data,
       category_id: categoryInput,
