@@ -2,3 +2,4 @@ src/lib/$path.ts
 next.config.js
 tailwind.config.js
 postcss.config.js
+src/stories
