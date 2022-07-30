@@ -28,6 +28,7 @@
   ],
   "rules": {
     "@typescript-eslint/indent": ["error", 2],
+    "tailwindcss/no-custom-classname": "off",
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-empty-function": "error",
