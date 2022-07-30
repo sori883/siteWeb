@@ -1,8 +1,7 @@
 import type { NextPage } from 'next';
-import { LayoutManage } from 'components/layouts/LayoutManage';
-import { SidebarManage } from 'components/layouts/SidebarManage';
-import { useRequireLogin } from 'hooks/auth/useRequireLogin';
-import { TagList } from 'components/tags/TagsList';
+import { LayoutManage } from 'components/manages/Layout';
+import { useRequireLogin } from 'features/auth/api/useRequireLogin';
+import { TagList } from 'features/tag/components/TagsList';
 
 
 const TagIndex: NextPage = () => {
@@ -11,7 +10,6 @@ const TagIndex: NextPage = () => {
   return (
     <LayoutManage>
       <h1>LIST</h1>
-      <SidebarManage />
       <TagList />
 
     </LayoutManage>

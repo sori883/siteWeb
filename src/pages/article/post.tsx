@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
-import { LayoutManage } from 'components/layouts/LayoutManage';
-import { SidebarManage } from 'components/layouts/SidebarManage';
-import { ArticleForm } from 'components/articles/ArticleForm';
-import { useRequireLogin } from 'hooks/auth/useRequireLogin';
-import { useArticle } from 'hooks/article';
+import { LayoutManage } from 'components/manages/Layout';
+import { ArticleForm } from 'features/article/components/ArticleForm';
+import { useRequireLogin } from 'features/auth/api/useRequireLogin';
+import { useArticle } from 'features/article/api/article';
 
 const ArticlePost: NextPage = () => {
   useRequireLogin();
@@ -22,7 +21,6 @@ const ArticlePost: NextPage = () => {
   return (
     <LayoutManage>
       <h1>NEW</h1>
-      <SidebarManage />
       <ArticleForm
         article={createArticle}
         submitAction={createAction}
