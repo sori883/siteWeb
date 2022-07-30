@@ -1,19 +1,22 @@
 import type { NextPage } from 'next';
-import { SidebarManage } from 'components/layouts/SidebarManage';
-import { LayoutManage } from 'components/layouts/LayoutManage';
-import { ImgUpload } from 'components/imageLibrary/ImgUpload';
-import { ImgList } from 'components/imageLibrary/ImgList';
+import { LayoutManage } from 'components/manages/Layout';
+import { ImgUpload } from 'features/imageLibrary/components/ImgUpload';
+import { ImgList } from 'features/imageLibrary/components/ImgList';
+import { useRequireLogin } from 'features/auth/api/useRequireLogin';
 
 
-const LibraryIndex: NextPage = () => (
-  <>
-    <LayoutManage>
-      <h2>画像アップロード</h2>
-      <SidebarManage />
-      <ImgUpload />
-      <ImgList />
-    </LayoutManage>
-  </>
-);
+const LibraryIndex: NextPage = () => {
+  useRequireLogin();
+  
+  return (
+    <>
+      <LayoutManage>
+        <h2>画像アップロード</h2>
+        <ImgUpload />
+        <ImgList />
+      </LayoutManage>
+    </>
+  );
+};
 
 export default LibraryIndex;

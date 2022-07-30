@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
-import { LayoutManage } from 'components/layouts/LayoutManage';
-import { SidebarManage } from 'components/layouts/SidebarManage';
-import { useRequireLogin } from 'hooks/auth/useRequireLogin';
-import { CategoryList } from 'components/categories/CategoryList';
-import { CategoryCreateForm } from 'components/categories/CategoryCreateForm';
+import { LayoutManage } from 'components/manages/Layout';
+import { useRequireLogin } from 'features/auth/api/useRequireLogin';
+import { CategoryList } from 'features/category/components/CategoryList';
+import { CategoryCreateForm } from 'features/category/components/CategoryCreateForm';
 
 
 const CategoryIndex: NextPage = () => {
@@ -12,7 +11,6 @@ const CategoryIndex: NextPage = () => {
   return (
     <LayoutManage>
       <h1>LIST</h1>
-      <SidebarManage />
       <CategoryCreateForm />
       <CategoryList />
 

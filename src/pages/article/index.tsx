@@ -1,8 +1,7 @@
 import type { NextPage } from 'next';
-import { LayoutManage } from 'components/layouts/LayoutManage';
-import { SidebarManage } from 'components/layouts/SidebarManage';
-import { useRequireLogin } from 'hooks/auth/useRequireLogin';
-import { ArticleList } from 'components/articles/ArticleList';
+import { LayoutManage } from 'components/manages/Layout';
+import { useRequireLogin } from 'features/auth/api/useRequireLogin';
+import { ArticleList } from 'features/article/components/ArticleList';
 
 
 const ArticleIndex: NextPage = () => {
@@ -10,8 +9,6 @@ const ArticleIndex: NextPage = () => {
 
   return (
     <LayoutManage>
-      <h1>LIST</h1>
-      <SidebarManage />
       <ArticleList />
 
     </LayoutManage>
