@@ -1,4 +1,5 @@
-import '../styles/globals.scss';
+import 'nprogress/nprogress.css';
+import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { NormalizeCSS, MantineProvider } from '@mantine/core';
 import type { AppProps } from 'next/app';
@@ -8,12 +9,23 @@ import NextHeadSeo from 'next-head-seo';
 import { ToastContainer } from 'react-toastify';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
 import { currentUserState } from 'states/atoms/user';
-import { useAuth } from 'hooks/auth';
+import { useUser } from 'features/auth/api/fetchUser';
+import nprogress from 'nprogress';
 
+nprogress.configure({ showSpinner: false, speed: 400, minimum: 0.25 });
 
 function AppInit():null {
   const setCurrentUser = useSetRecoilState(currentUserState);
-  const { user, error } = useAuth();
+  const { user, error } = useUser();
+
+  // 画面遷移プログレス開始
+  if (process.browser) {
+    nprogress.start();
+  }
+  // 画面遷移プログレス終了
+  useEffect(() => {
+    nprogress.done();
+  });
 
   useEffect(() => {
     ((): void => {
