@@ -58,13 +58,13 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
       <MantineProvider>
         <SWRConfig
           value={{
-            // エラー時リトライ回数
             errorRetryCount: 0,
-            // windowフォーカス時再取得しない
             revalidateOnFocus: false
           }}
         >
-          <Component {...pageProps} />
+          <div id='root'>
+            <Component {...pageProps} />
+          </div>
           <AppInit />
         </SWRConfig>
       </MantineProvider>
