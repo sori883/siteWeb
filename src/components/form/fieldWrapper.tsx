@@ -15,7 +15,7 @@ export type FieldWrapperPassThroughProps = Omit<FieldWrapperProps, 'className' |
 export const FieldWrapper = (props: FieldWrapperProps): JSX.Element => {
   const { label, className, error, children } = props;
   return (
-    <div className='form-control w-full max-w-md'>
+    <div className='form-control w-full'>
       <label className={clsx('label', className)}>
         <span className='label-text'>{label}</span>
       </label>
