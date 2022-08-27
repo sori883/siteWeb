@@ -13,14 +13,13 @@ const ArticlePost: NextPage = () => {
     title: '',
     entry: '',
     publish_at: true,
-    image_id: null,
+    image: null,
     category: null,
     tags: undefined
   };
 
   return (
     <LayoutManage>
-      <h1>NEW</h1>
       <ArticleForm
         article={createArticle}
         submitAction={createAction}
