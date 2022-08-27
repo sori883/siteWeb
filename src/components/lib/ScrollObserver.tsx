@@ -1,4 +1,5 @@
 import { memo, useEffect, useRef } from "react";
+import { Spinner } from 'components/elements/spinner';
 
 export const ScrollObserver = memo((props: {
   onIntersect: () => void,
@@ -26,8 +27,8 @@ export const ScrollObserver = memo((props: {
   return (
     <>
       {!props.isActiveObserver ? (
-        <div ref={ref} style={{ height: "50px", backgroundColor: "red" }}>
-          <p>読み込み中...</p>
+        <div ref={ref}>
+          <Spinner size='xl' className='mx-auto' />
         </div>
       ) : null} 
     </>
