@@ -3,9 +3,15 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { imageLoader } from 'components/lib/ImageLoader';
 
+const sizes = {
+  sm: 'w-60',
+  md: 'w-80',
+};
+
 export type FigureCardProps = {
   path: string;
   alt?: string;
+  size?: keyof typeof sizes;
   className?: string;
   children: ReactNode;
 };
@@ -14,11 +20,13 @@ export const FigureCard = ({
   path,
   alt='picture',
   className = '',
+  size = 'md',
   children
 }: FigureCardProps): JSX.Element  => (
   <>
     <div className={clsx(
-      'card card-compact w-80 rounded-none',
+      'card card-compact rounded-none',
+      sizes[size],
       className
     )}
     >
