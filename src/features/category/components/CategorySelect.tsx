@@ -24,6 +24,7 @@ export function CategorySelect(props: {
 
   return (
     <Select
+      className='text-black'
       options={props.categories.data}
       onChange={handleOnChange}
       defaultValue={initSelect(props.initVal)}
