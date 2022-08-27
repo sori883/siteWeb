@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import useSWR, { SWRResponse, useSWRConfig } from 'swr';
 import { toast } from 'react-toastify';
 import { pagesPath } from 'lib/$path';
-import { Article } from 'features/article/types/article';
+import { Article, ArticlePostParam } from 'features/article/types/article';
 
 type HookReturn = {
   getItem: (id: number) => SWRResponse<Article>;
-  createAction: (article: Article) => Promise<void>;
-  updateAction: (article: Article) => Promise<void>;
+  createAction: (article: ArticlePostParam) => Promise<void>;
+  updateAction: (article: ArticlePostParam) => Promise<void>;
 }
 
 export const useArticle = (): HookReturn => {
@@ -24,7 +24,7 @@ export const useArticle = (): HookReturn => {
     );
   };
 
-  const createAction = async (article: Article): Promise<void> => {
+  const createAction = async (article: ArticlePostParam): Promise<void> => {
     await axios
       .post('/api/storeArticle', article)
       .then(() => {
@@ -36,7 +36,7 @@ export const useArticle = (): HookReturn => {
       });
   };
 
-  const updateAction = async (article: Article): Promise<void> => {
+  const updateAction = async (article: ArticlePostParam): Promise<void> => {
     const api = `/api/updateArticle/${article.id}`;
     await axios
       .patch(`/api/updateArticle/${article.id}`, article)
