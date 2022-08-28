@@ -41,11 +41,6 @@
     "arrow-parens": "error",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "semi": "error",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": [
-      "warn", {
-        "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
-      }
+    "semi": "error"
   }
 }
