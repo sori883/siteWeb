@@ -27,12 +27,12 @@ type HookReturn = {
 const LIMIT = 15;
 
 // アイキャッチセレクター
-export const useSelectImages = (config: SWRConfiguration, id: number | null): HookReturn => {
+export const useSelectImages = (config: SWRConfiguration, image: ImageItem | null): HookReturn => {
 
   // 無限ロード可(0>interval)否(0=interval)
   const [interval, setInterval] = useState<number>(10000);
   // アイキャッチ選択値を格納
-  const [imageInput, setImageInput] = useState<ImageInput>(id);
+  const [imageInput, setImageInput] = useState<ImageInput>(image);
   
   const getKey = (pageIndex: number, previousPageData: ImagesList): string | null => {
     if (previousPageData && !previousPageData.length) return null;

@@ -1,5 +1,5 @@
 export type ImageItem = {
-  id: number | null,
+  id: number,
   title: string,
   path: string,
 };

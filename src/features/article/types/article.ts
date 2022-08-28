@@ -8,7 +8,11 @@ export type Article = {
   title: string;
   entry: string;
   publish_at: boolean;
-  image_id: null | number;
+  image: null | {
+    id: number,
+    title: string,
+    path: string,
+  };
   category: null | {
     id: number;
     name: string;
@@ -19,6 +23,22 @@ export type Article = {
     text: string;
   }[];
 };
+
+// 記事データをpostするときの型
+export type ArticlePostParam = {
+  id: number;
+  permalink: string;
+  title: string;
+  entry: string;
+  publish_at: boolean;
+  image: null | number;
+  category: null | number;
+  tags: {
+    id: string;
+    text: string;
+  }[];
+};
+
 
 /* article list item */
 export type ArticleItem = {
@@ -42,7 +62,7 @@ export type ArticleCreateParam = {
   title: string;
   entry: string;
   publish_at: boolean;
-  image_id: null | number;
+  image: null;
   category: null | {
     id: number;
     name: string;

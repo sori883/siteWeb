@@ -17,7 +17,6 @@ const ArticlePost: NextPage = () => {
 
   return (
     <LayoutManage>
-      <h1>EDIT</h1>
       <ArticleForm
         article={article}
         submitAction={updateAction}

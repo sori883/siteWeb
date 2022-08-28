@@ -4,30 +4,30 @@ import {
 } from 'features/imageLibrary/types/imageLibrary';
 import { imageLoader } from 'components/lib/ImageLoader';
 import { setImageInput } from 'features/imageLibrary/types/select';
+import { Button } from 'components/elements/button';
 
 export function ImgSelectItem(props: {
   image: ImageItem,
   setter: setImageInput
 }): JSX.Element {
   const handleClick = ():void => {
-    props.setter(props.image.id);
+    props.setter(props.image);
   };
 
   return (
-    <>
-      <p>{props.image.id}</p>
+    <div>
       <p>{props.image.title}</p>
-      <div style={{position: 'relative', width: '100px', height: '100px'}} >
+      <div style={{position: 'relative', width: '150px', height: '100px'}} >
         <Image
           loader={imageLoader}
           src={props.image.path}
+          width='150px'
           alt='a picture'
           layout='fill'
           objectFit='contain'
         />
       </div>
-      <button onClick={handleClick}>選択</button>
-      <p>{props.image.path}</p>
-    </>
+      <Button size='sm' onClick={handleClick}>選択</Button>
+    </div>
   );
 }

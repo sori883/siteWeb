@@ -57,6 +57,7 @@ export function TagsSelect(props: {
   return (
     <>
       <CreatableSelect
+        className='text-black'
         components={components}
         inputValue={inputValue}
         isClearable
