@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { CurrentUser } from 'types/user';
+import { CurrentUser } from 'features/auth/types/user';
 import { AtomKeys } from 'states/recoilKeys';
 
 // undefined : まだログイン確認が完了していない状態とする

@@ -3,7 +3,7 @@ import { pagesPath } from 'lib/$path';
 import Link from 'next/link';
 
 export function Navbar(): JSX.Element {
-  const { logout } = useLogout();
+ const { logout } = useLogout();
 
   const handleLogout = ():void => {
     logout();
