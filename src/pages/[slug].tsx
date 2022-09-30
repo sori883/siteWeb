@@ -1,32 +1,45 @@
-import type { NextPage, GetStaticProps  } from 'next';
+import type { NextPage, GetStaticPaths, GetStaticProps  } from 'next';
 import { ArticlePublic } from 'features/article/types/articlePublic';
 import { CategoryPublic } from 'features/category/types/categoryPublic';
-import { fetcharticleIndex } from 'features/article/api/articlePublic';
 import { fetchCategoryIndex } from 'features/category/api/categoryPublic';
+import { fetchArticleCategory } from 'features/article/api/articleCategoryPublic';
 import { LayoutPublic } from 'components/publicLayout/Layout';
 import { DoubleColLayout } from 'components/publicLayout/DoubleColLayout';
 import { ArticleListPublic } from 'features/article/components/ArticleListPublic';
 import { CategoryItemPublic } from 'features/category/components/CategoryItemPublic';
 
-type Props = {
+type Props =  {
   fallbackArticle: ArticlePublic[];
+  slug: string;
   fallbackCategory: CategoryPublic[];
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const articleData = (await fetcharticleIndex()).data;
+export const getStaticPaths: GetStaticPaths  = async () => {
+  const res = await fetchCategoryIndex();
+  const paths = res.map((item: CategoryPublic) => ({ params: {slug: `${item.slug}`}}));
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({
+  params
+}) => {
+  if (typeof params?.slug !== 'string') {
+    return { notFound: true };
+  }
+  const res = (await fetchArticleCategory(params.slug));
+  const articleData = res.data;
   const categoryData = await fetchCategoryIndex();
+
 
   return {
     props: {
       fallbackArticle: articleData,
       fallbackCategory: categoryData,
     },
-    revalidate: false,
   };
 };
 
-const Home: NextPage<Props> = ({
+const Category: NextPage<Props> = ({
   fallbackArticle,
   fallbackCategory
 }) => (
@@ -48,4 +61,4 @@ const Home: NextPage<Props> = ({
   </>
 );
 
-export default Home;
+export default Category;

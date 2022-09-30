@@ -20,7 +20,7 @@ export function CategorySelect(props: {
   // selectの初期値を設定
   const initSelect = (val: Category | null):CategorySelectValues => val ?
     { label: val.name, value: val.id } :
-    props.categories.data[0];
+    { label: props.categories.data[0].label, value:  props.categories.data[0].value};
 
   return (
     <Select

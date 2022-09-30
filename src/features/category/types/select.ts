@@ -12,5 +12,5 @@ export type CategorySelectValues = {
 
 /* fetch category data */
 export type FetchSelectorCategories = {
-  data: CategorySelectValues[]
+  data: (CategorySelectValues & {slug: string})[]
 };

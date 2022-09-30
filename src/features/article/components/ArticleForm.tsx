@@ -14,7 +14,7 @@ import { ImgSelectModal } from 'features/imageLibrary/components/imgSelectModal'
 import { ThumbnailView } from 'features/article/components/ThumbnailView';
 import { Spinner } from 'components/elements/spinner';
 
-type SubmitAction = (article: ArticlePostParam) => Promise<void>;
+type SubmitAction = (article: ArticlePostParam, slug: string | undefined) => Promise<void>;
 
 const schema = z.object({
   permalink: z.string().min(1, { message: 'パーマリンクを入力してください' })
@@ -72,7 +72,13 @@ export function ArticleForm(props: {article: Article | ArticleCreateParam, submi
     };
   
     const updateData: ArticlePostParam = {...props.article, ...InputData};
-    return props.submitAction(updateData);
+    console.log(categoryInput);
+    console.log(selectCategories?.data.filter((category) => category.value === categoryInput)[0]);
+    const slug =  selectCategories ? 
+      selectCategories.data.filter((category) => category.value === categoryInput)[0].slug
+      :
+      undefined;
+    return props.submitAction(updateData, slug);
   };
   return (
     <div className='h-screen grid grid-cols-1 xl:grid-cols-4 gap-3'>

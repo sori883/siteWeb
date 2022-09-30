@@ -21,7 +21,6 @@ export function ImgSelectItem(props: {
         <Image
           loader={imageLoader}
           src={props.image.path}
-          width='150px'
           alt='a picture'
           layout='fill'
           objectFit='contain'

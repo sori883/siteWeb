@@ -7,6 +7,7 @@ import {
   fetchAllCategoryList,
   CategoryActionParam,
 } from 'features/category/types/category';
+import { revalidateIndex, revalidateCategoryIndex } from 'util/revalidate/revalidation';
 
 type HookReturn = {
   categories: fetchAllCategoryList | undefined;
@@ -29,6 +30,9 @@ export const useCategories = (pageIndex = 1): HookReturn => {
       .then(() => {
         toast.success('削除に成功しました');
         mutate(categories);
+        // on demand
+        revalidateIndex();
+        revalidateCategoryIndex(category.slug);
       })
       .catch(() => {
         toast.error('削除に失敗しました');
@@ -41,6 +45,9 @@ export const useCategories = (pageIndex = 1): HookReturn => {
       .then(() => {
         toast.success('登録に成功しました');
         mutate(categories);
+        // on demand
+        revalidateIndex();
+        revalidateCategoryIndex(category.slug);
       })
       .catch(() => {
         toast.error('登録に失敗しました');
@@ -53,6 +60,9 @@ export const useCategories = (pageIndex = 1): HookReturn => {
       .then(() => {
         toast.success('登録に成功しました');
         mutate(categories);
+        // on demand
+        revalidateIndex();
+        revalidateCategoryIndex(category.slug);
       })
       .catch(() => {
         toast.error('登録に失敗しました');

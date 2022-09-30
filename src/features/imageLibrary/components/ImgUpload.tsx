@@ -2,10 +2,11 @@ import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useImageLibrary } from 'features/imageLibrary/api/imageLibrary';
 import { Spinner } from 'components/elements/spinner';
+import { CreateActionParam } from '../types/imageLibrary';
 
 export function ImgUpload(): JSX.Element {
   const { createAction, isLoading } = useImageLibrary();
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = useCallback((acceptedFiles: CreateActionParam) => {
     createAction(acceptedFiles);
   }, []);
 
