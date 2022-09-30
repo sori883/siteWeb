@@ -29,17 +29,15 @@ export function ArticleList(): JSX.Element {
 
   return (
     <>
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid grid-cols-2'>
         {
           articles.data.map((item: ArticleItem) => (
-            <div className='my-2'>
-              <ArticleListItem
-                article={item}
-                deleteAction={deleteAction}
-                visibleAction={visibleAction}
-                key={item.id}
-              />
-            </div>
+            <ArticleListItem
+              article={item}
+              deleteAction={deleteAction}
+              visibleAction={visibleAction}
+              key={item.id}
+            />
           ))
         }
       </div>

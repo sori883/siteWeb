@@ -16,13 +16,19 @@ type HookReturn = {
 
 // カテゴリーセレクター
 export const useSelectCategories = (id: number | null): HookReturn => {
+
   // カテゴリー選択値を格納
   const [categoryInput, setCategoryInput] = useState<number | null>(id);
 
   const { data: selectCategories, error } = useSWR<FetchSelectorCategories>('api/fetchSelectorCategories', (url) =>
     axios.get<FetchSelectorCategories>(url)
-      .then((res) => res.data)
+      .then((res) => {
+        // idがnullの場合は初期値を設定
+        if(!id) setCategoryInput(res.data.data[0].value);
+        return res.data;
+      })
   );
+
 
   return {
     categoryInput,

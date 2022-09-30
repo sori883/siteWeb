@@ -46,6 +46,7 @@ export type ArticleItem = {
   title: string,
   permalink: string,
   publish_at: string,
+  slug: string;
 };
 
 /* fetchAllArticles Response */

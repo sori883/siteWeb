@@ -6,17 +6,12 @@ import { useEffect } from 'react';
 import { SWRConfig } from 'swr';
 import NextHeadSeo from 'next-head-seo';
 import { ToastContainer } from 'react-toastify';
-import { RecoilRoot, useSetRecoilState } from 'recoil';
-import { currentUserState } from 'states/atoms/user';
-import { useUser } from 'features/auth/api/fetchUser';
+import { RecoilRoot } from 'recoil';
 import nprogress from 'nprogress';
 
 nprogress.configure({ showSpinner: false, speed: 400, minimum: 0.25 });
 
 function AppInit():null {
-  const setCurrentUser = useSetRecoilState(currentUserState);
-  const { user, error } = useUser();
-
   // 画面遷移プログレス開始
   if (process.browser) {
     nprogress.start();
@@ -25,17 +20,6 @@ function AppInit():null {
   useEffect(() => {
     nprogress.done();
   });
-
-  useEffect(() => {
-    ((): void => {
-      if (error && !user) {
-        setCurrentUser(null);
-        return;
-      }
-      const currentUser = user;
-      setCurrentUser(currentUser);
-    })();
-  },[user]);
 
   return null;
 }

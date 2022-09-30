@@ -2,6 +2,8 @@ import axios from 'lib/axios';
 import useSWR from 'swr';
 import { toast } from 'react-toastify';
 import { ArticleItem, FetchArticlesList } from 'features/article/types/article';
+import { revalidateIndex, revalidateCategoryIndex } from 'util/revalidate/revalidation';
+
 
 type HookReturn = {
   articles: FetchArticlesList | undefined;
@@ -23,6 +25,9 @@ export const useArticles = (pageIndex = 1): HookReturn => {
       .then(() => {
         toast.success('削除に成功しました');
         mutate(articles);
+        // on demand
+        revalidateIndex();
+        revalidateCategoryIndex(article.slug);
       })
       .catch(() => {
         toast.error('削除に失敗しました');
@@ -35,6 +40,10 @@ export const useArticles = (pageIndex = 1): HookReturn => {
       .then(() => {
         toast.success('公開設定を変更しました');
         mutate(articles);
+        // on demand
+        revalidateIndex();
+        console.log(article.slug);
+        revalidateCategoryIndex(article.slug);
       })
       .catch(() => {
         toast.error('公開設定を変更に失敗しました');

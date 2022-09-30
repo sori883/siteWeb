@@ -1,4 +1,7 @@
 export const pagesPath = {
+  _slug: (slug: string | number) => ({
+    $url: (url?: { hash?: string }) => ({ pathname: '/[slug]' as const, query: { slug }, hash: url?.hash })
+  }),
   account: {
     forgot: {
       $url: (url?: { hash?: string }) => ({ pathname: '/account/forgot' as const, hash: url?.hash })
