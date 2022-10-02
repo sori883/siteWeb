@@ -28,6 +28,7 @@
   ],
   "rules": {
     "@typescript-eslint/indent": ["error", 2],
+    "tailwindcss/no-custom-classname": "off",
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-empty-function": "error",
@@ -36,9 +37,10 @@
     "no-duplicate-imports": "error",
     "spaced-comment": "error",
     "arrow-spacing": "error",
-    "arrow-body-style": ["error", "always"],
+    "arrow-body-style": ["error", "as-needed"],
     "arrow-parens": "error",
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "semi": "error"
   }
 }
