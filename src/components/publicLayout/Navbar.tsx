@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export function Navbar(): JSX.Element {
   return (
-    <div className={'h-16 flex items-center'}>
+    <div className={'h-16 flex items-center bg-base-300'}>
       <div className={'navbar'}>
         <div className={'flex-none'}>
         </div>

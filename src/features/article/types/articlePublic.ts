@@ -6,6 +6,7 @@ export type ArticlePublic = {
   id: number;
   permalink: string;
   title: string;
+  entry: string;
   publish_at: boolean;
   image: null | {
     id: number,
@@ -18,6 +19,10 @@ export type ArticlePublic = {
     slug: string;
   };
 };
+
+export type FetchArticlesPublic = {
+  data: ArticlePublic;
+} 
 
 /* fetchAllArticles Response */
 export type FetchArticlesListPublic = {
