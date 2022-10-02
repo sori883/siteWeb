@@ -12,12 +12,12 @@ export function ArticleItemPublic(props: {
   return (
     <>
       <div className='relative card w-full bg-base-100 shadow-xl rounded-none'>
-        <Link href={`${pagesPath.$url()}`}>
+        <Link href={pagesPath.post._permalink(article.permalink).$url()}>
           <a>
             <figure className='relative w-full min-h-[12rem]'>
               <Image
                 loader={imageLoader}
-                src={'2022/pXkiHeDNpuDASX8PxL8nzdksX0P3U4TeRA1rkw2O.jpg'}
+                src={article.image ? article.image.path : ''}
                 alt='a picture'
                 layout='fill'
                 objectFit='cover'
